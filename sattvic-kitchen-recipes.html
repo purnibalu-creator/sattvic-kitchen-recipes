@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sattvic Kitchen — Pure & Sacred Recipes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf8f0;
+    --parchment: #f5ead6;
+    --saffron: #e8a020;
+    --turmeric: #d4891a;
+    --sage: #7a9e7e;
+    --sage-dark: #4a7050;
+    --lotus: #c97d6e;
+    --terracotta: #b5613a;
+    --ink: #2c2416;
+    --ink-light: #5a4e3a;
+    --bark: #8b6f47;
+    --panel: #fef9f0;
+    --border: #e8d9bc;
+    --shadow: rgba(44,36,22,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #2c2416 0%, #3d3020 40%, #4a3828 100%);
+    padding: 50px 20px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(232,160,32,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(201,125,110,0.10) 0%, transparent 60%);
+  }
+
+  .mandala-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    opacity: 0.04;
+    animation: slowSpin 60s linear infinite;
+  }
+
+  @keyframes slowSpin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .header-content { position: relative; z-index: 1; }
+
+  .om-symbol {
+    font-size: 2rem;
+    color: var(--saffron);
+    opacity: 0.8;
+    margin-bottom: 10px;
+    display: block;
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(232,160,32,0.3); }
+    50% { text-shadow: 0 0 25px rgba(232,160,32,0.7); }
+  }
+
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 300;
+    color: var(--parchment);
+    letter-spacing: 4px;
+    line-height: 1.1;
+  }
+
+  header h1 span {
+    color: var(--saffron);
+    font-style: italic;
+  }
+
+  header .subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(253,248,240,0.45);
+    margin-top: 10px;
+  }
+
+  .sattva-note {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 6px 20px;
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 30px;
+    font-size: 0.72rem;
+    color: rgba(253,248,240,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* ─── INPUT SECTION ─── */
+  .input-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 8px 40px var(--shadow);
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .input-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--lotus), var(--sage));
+  }
+
+  .input-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .input-card p {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  /* Tag input area */
+  .tag-input-wrap {
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: var(--cream);
+    min-height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
+    cursor: text;
+    transition: border-color 0.2s;
+  }
+
+  .tag-input-wrap:focus-within { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(232,160,32,0.08); }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #fdf0d8, #f8e4bc);
+    border: 1px solid rgba(232,160,32,0.3);
+    color: var(--terracotta);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    animation: tagPop 0.2s ease;
+    white-space: nowrap;
+  }
+
+  @keyframes tagPop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .tag button {
+    background: none; border: none; cursor: pointer;
+    color: var(--bark); font-size: 0.9rem; line-height: 1;
+    padding: 0; opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+  .tag button:hover { opacity: 1; }
+
+  #ingredientInput {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    color: var(--ink);
+    flex: 1;
+    min-width: 180px;
+    padding: 4px 0;
+  }
+
+  #ingredientInput::placeholder { color: #b8a888; }
+
+  .input-hint {
+    font-size: 0.73rem;
+    color: var(--bark);
+    margin-top: 10px;
+    opacity: 0.7;
+  }
+
+  /* Quick ingredient chips */
+  .quick-chips {
+    margin-top: 20px;
+  }
+
+  .quick-chips p {
+    font-size: 0.72rem;
+    color: var(--ink-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .chip {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    background: white;
+    color: var(--ink-light);
+    transition: all 0.18s;
+  }
+
+  .chip:hover {
+    background: var(--parchment);
+    border-color: var(--saffron);
+    color: var(--terracotta);
+    transform: translateY(-1px);
+  }
+
+  /* Meal type filter */
+  .meal-type-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .meal-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    background: white;
+    color: var(--ink-light);
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .meal-chip.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--parchment);
+  }
+
+  .meal-chip:hover:not(.active) {
+    border-color: var(--saffron);
+    color: var(--saffron);
+  }
+
+  /* Generate button */
+  .generate-btn {
+    width: 100%;
+    margin-top: 28px;
+    padding: 18px;
+    background: linear-gradient(135deg, #2c2416, #4a3828);
+    color: var(--parchment);
+    border: none;
+    border-radius: 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .generate-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,160,32,0.15), rgba(201,125,110,0.15));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .generate-btn:hover::before { opacity: 1; }
+  .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(44,36,22,0.25); }
+  .generate-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* ─── LOADING ─── */
+  .loading-state {
+    text-align: center;
+    padding: 60px 20px;
+    display: none;
+  }
+
+  .lotus-spinner {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    animation: lotusSpin 2s linear infinite;
+  }
+
+  @keyframes lotusSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-state p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  .loading-state .sub {
+    font-size: 0.78rem;
+    color: var(--bark);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* ─── RESULTS ─── */
+  #resultsSection { display: none; }
+
+  .results-header {
+    text-align: center;
+    margin-bottom: 36px;
+    animation: fadeUp 0.5s ease;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 300;
+    color: var(--ink);
+  }
+
+  .results-header h2 em { color: var(--saffron); font-style: italic; }
+
+  .results-header p { font-size: 0.85rem; color: var(--ink-light); margin-top: 6px; }
+
+  /* Category section */
+  .category-section {
+    margin-bottom: 44px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .category-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .cat-breakfast .category-icon { background: linear-gradient(135deg, #fde8b4, #f8d690); }
+  .cat-main .category-icon { background: linear-gradient(135deg, #d4e8d0, #b8d4b4); }
+  .cat-snack .category-icon { background: linear-gradient(135deg, #f4d4c8, #ecbfb0); }
+  .cat-drink .category-icon { background: linear-gradient(135deg, #c8dce8, #b0ccd8); }
+  .cat-dessert .category-icon { background: linear-gradient(135deg, #e8d0e4, #d8bcd4); }
+  .cat-salad .category-icon { background: linear-gradient(135deg, #d8ead8, #c0d8c0); }
+
+  .category-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  .category-count {
+    font-size: 0.72rem;
+    color: var(--bark);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Recipe cards grid */
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .recipe-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .recipe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px var(--shadow);
+    border-color: rgba(232,160,32,0.3);
+  }
+
+  .recipe-card-header {
+    padding: 20px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .recipe-emoji { font-size: 1.8rem; margin-bottom: 10px; }
+
+  .recipe-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .recipe-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .meta-pill {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .meta-time { background: #fef3e2; color: #a0620a; }
+  .meta-diff { background: #eef5ee; color: #4a7050; }
+  .meta-serv { background: #f8eeee; color: #8b3a3a; }
+
+  .recipe-desc {
+    padding: 12px 20px;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .recipe-ingredients-preview {
+    padding: 0 20px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .ing-tag {
+    font-size: 0.7rem;
+    padding: 2px 9px;
+    background: var(--parchment);
+    border-radius: 8px;
+    color: var(--bark);
+  }
+
+  .view-recipe-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--parchment);
+    border: none;
+    border-top: 1px solid var(--border);
+    color: var(--terracotta);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .view-recipe-btn:hover {
+    background: var(--saffron);
+    color: white;
+  }
+
+  /* ─── RECIPE MODAL ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44,36,22,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: var(--cream);
+    border-radius: 24px;
+    max-width: 680px;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    animation: modalSlide 0.3s ease;
+    box-shadow: 0 30px 80px rgba(44,36,22,0.3);
+    position: relative;
+  }
+
+  @keyframes modalSlide {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-banner {
+    background: linear-gradient(135deg, #2c2416, #4a3828);
+    padding: 36px 36px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0; right: 0;
+    height: 60px;
+    background: var(--cream);
+    border-radius: 50% 50% 0 0 / 30px 30px 0 0;
+  }
+
+  .modal-emoji { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--parchment);
+    line-height: 1.2;
+  }
+
+  .modal-subtitle {
+    font-size: 0.78rem;
+    color: rgba(253,248,240,0.5);
+    margin-top: 6px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--parchment);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+
+  .modal-close:hover { background: rgba(255,255,255,0.2); }
+
+  .modal-body { padding: 36px; }
+
+  .modal-meta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .modal-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+  }
+
+  .modal-meta-item strong { color: var(--ink); font-weight: 500; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ingredients-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  @media (max-width: 480px) {
+    .ingredients-list { grid-template-columns: 1fr; }
+    .modal-body { padding: 24px; }
+    .modal-banner { padding: 28px 24px 24px; }
+  }
+
+  .ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.83rem;
+    color: var(--ink);
+  }
+
+  .ingredient-item::before {
+    content: '•';
+    color: var(--saffron);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .steps-list { margin-bottom: 28px; }
+
+  .step-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--saffron), var(--turmeric));
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .step-text {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .ayurveda-note {
+    background: linear-gradient(135deg, #fdf5e4, #faecd0);
+    border: 1px solid rgba(232,160,32,0.25);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+
+  .ayurveda-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--terracotta);
+    line-height: 1.7;
+  }
+
+  .ayurveda-note p strong {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--saffron);
+  }
+
+  /* ─── EMPTY / ERROR ─── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ink-light);
+    display: none;
+  }
+
+  .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+  .empty-state h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .empty-state p { font-size: 0.85rem; line-height: 1.6; }
+
+  /* ─── DIVIDER ORNAMENT ─── */
+  .ornament {
+    text-align: center;
+    color: var(--saffron);
+    font-size: 1rem;
+    opacity: 0.4;
+    margin: 8px 0 24px;
+    letter-spacing: 8px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.75rem;
+    color: var(--bark);
+    opacity: 0.6;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* Streaming text animation */
+  .streaming { opacity: 0.7; }
+  .streaming::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <svg class="mandala-bg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="100" cy="100" r="90" stroke="white" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="70" stroke="white" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="50" stroke="white" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="30" stroke="white" stroke-width="0.5"/>
+    <line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width="0.5"/>
+    <line x1="10" y1="100" x2="190" y2="100" stroke="white" stroke-width="0.5"/>
+    <line x1="27" y1="27" x2="173" y2="173" stroke="white" stroke-width="0.5"/>
+    <line x1="173" y1="27" x2="27" y2="173" stroke="white" stroke-width="0.5"/>
+    <line x1="100" y1="10" x2="173" y2="173" stroke="white" stroke-width="0.3"/>
+    <line x1="100" y1="10" x2="27" y2="173" stroke="white" stroke-width="0.3"/>
+    <line x1="10" y1="100" x2="173" y2="27" stroke="white" stroke-width="0.3"/>
+    <line x1="10" y1="100" x2="173" y2="173" stroke="white" stroke-width="0.3"/>
+    <polygon points="100,15 115,50 150,35 135,70 170,85 135,100 150,135 115,120 100,155 85,120 50,135 65,100 30,85 65,70 50,35 85,50" stroke="white" stroke-width="0.5" fill="none"/>
+  </svg>
+  <div class="header-content">
+    <span class="om-symbol">ॐ</span>
+    <h1>Sattvic <span>Kitchen</span></h1>
+    <p class="subtitle">Pure · Nourishing · Sacred</p>
+    <div class="sattva-note">No Onion · No Garlic · No Meat · No Eggs</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <!-- INPUT CARD -->
+  <div class="input-card">
+    <h2>What's in your kitchen?</h2>
+    <p>Enter your ingredients or vegetables and we'll discover all the sattvic recipes you can make — categorised by meal type, with full step-by-step guidance.</p>
+
+    <div class="tag-input-wrap" id="tagWrap" onclick="focusInput()">
+      <input type="text" id="ingredientInput"
+        placeholder="Type an ingredient and press Enter…"
+        onkeydown="handleKeydown(event)"
+        oninput="handleInput(event)">
+    </div>
+    <p class="input-hint">Press Enter or comma to add · Click × to remove</p>
+
+    <!-- Quick add chips -->
+    <div class="quick-chips">
+      <p>Quick Add</p>
+      <div class="chips-row" id="quickChips">
+        <span class="chip" onclick="addTag('Spinach')">🥬 Spinach</span>
+        <span class="chip" onclick="addTag('Tomato')">🍅 Tomato</span>
+        <span class="chip" onclick="addTag('Potato')">🥔 Potato</span>
+        <span class="chip" onclick="addTag('Carrot')">🥕 Carrot</span>
+        <span class="chip" onclick="addTag('Pumpkin')">🎃 Pumpkin</span>
+        <span class="chip" onclick="addTag('Milk')">🥛 Milk</span>
+        <span class="chip" onclick="addTag('Rice')">🌾 Rice</span>
+        <span class="chip" onclick="addTag('Moong Dal')">🫘 Moong Dal</span>
+        <span class="chip" onclick="addTag('Banana')">🍌 Banana</span>
+        <span class="chip" onclick="addTag('Coconut')">🥥 Coconut</span>
+        <span class="chip" onclick="addTag('Paneer')">🧀 Paneer</span>
+        <span class="chip" onclick="addTag('Ghee')">🫙 Ghee</span>
+        <span class="chip" onclick="addTag('Wheat Flour')">🌾 Wheat Flour</span>
+        <span class="chip" onclick="addTag('Curd')">🥣 Curd</span>
+      </div>
+    </div>
+
+    <!-- Meal type filters -->
+    <div style="margin-top:24px;">
+      <p style="font-size:0.72rem;color:var(--ink-light);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Filter by meal type (optional)</p>
+      <div class="meal-type-row" id="mealTypeRow">
+        <div class="meal-chip active" data-type="all" onclick="toggleMealType(this)">🍽 All Types</div>
+        <div class="meal-chip" data-type="breakfast" onclick="toggleMealType(this)">🌅 Breakfast</div>
+        <div class="meal-chip" data-type="main" onclick="toggleMealType(this)">🍱 Main Course</div>
+        <div class="meal-chip" data-type="snack" onclick="toggleMealType(this)">🌿 Snacks</div>
+        <div class="meal-chip" data-type="drink" onclick="toggleMealType(this)">🥤 Drinks</div>
+        <div class="meal-chip" data-type="dessert" onclick="toggleMealType(this)">🍮 Desserts</div>
+        <div class="meal-chip" data-type="salad" onclick="toggleMealType(this)">🥗 Salads</div>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateRecipes()">
+      ✦ Discover Sattvic Recipes
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading-state" id="loadingState">
+    <svg class="lotus-spinner" viewBox="0 0 60 60" fill="none">
+      <path d="M30 10 C30 10 20 20 20 30 C20 40 30 45 30 45 C30 45 40 40 40 30 C40 20 30 10 30 10Z" fill="rgba(232,160,32,0.3)" stroke="#e8a020" stroke-width="1"/>
+      <path d="M10 30 C10 30 20 20 30 20 C40 20 45 30 45 30 C45 30 40 40 30 40 C20 40 10 30 10 30Z" fill="rgba(201,125,110,0.3)" stroke="#c97d6e" stroke-width="1"/>
+      <path d="M15 15 C15 15 22 25 30 25 C38 25 45 15 45 15 C45 15 38 5 30 8 C22 11 15 15 15 15Z" fill="rgba(122,158,126,0.3)" stroke="#7a9e7e" stroke-width="1"/>
+      <circle cx="30" cy="30" r="5" fill="#e8a020" opacity="0.8"/>
+    </svg>
+    <p>Consulting ancient wisdom...</p>
+    <div class="sub" id="loadingMsg">Discovering sattvic recipes for you</div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultsSection">
+    <div class="results-header" id="resultsHeader"></div>
+    <div id="categoriesContainer"></div>
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="emptyState">
+    <div class="icon">🌿</div>
+    <h3>No recipes found</h3>
+    <p>Try adding more ingredients or changing your filters.<br>Remember — sattvic cooking excludes onion, garlic, meat, eggs, and alcohol.</p>
+  </div>
+</main>
+
+<!-- RECIPE MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="modal">
+    <div class="modal-banner">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span class="modal-emoji" id="modalEmoji">🍲</span>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-subtitle" id="modalSubtitle"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<footer>
+  ॐ सात्विक भोजन • Pure Food for Body & Soul • Made with 🧡
+</footer>
+
+<script>
+// ── STATE ─────────────────────────────────────────────
+let tags = [];
+let selectedMealType = 'all';
+let allRecipes = [];
+
+// ── TAG INPUT ─────────────────────────────────────────
+function focusInput() {
+  document.getElementById('ingredientInput').focus();
+}
+
+function handleKeydown(e) {
+  const val = e.target.value.trim();
+  if ((e.key === 'Enter' || e.key === ',') && val) {
+    e.preventDefault();
+    addTag(val);
+    e.target.value = '';
+  } else if (e.key === 'Backspace' && !e.target.value && tags.length > 0) {
+    removeTag(tags.length - 1);
+  }
+}
+
+function handleInput(e) {
+  if (e.target.value.includes(',')) {
+    const parts = e.target.value.split(',');
+    parts.slice(0, -1).forEach(p => { if (p.trim()) addTag(p.trim()); });
+    e.target.value = parts[parts.length - 1];
+  }
+}
+
+function addTag(name) {
+  const clean = name.replace(/[,]+/g, '').trim();
+  if (!clean || tags.includes(clean)) return;
+  tags.push(clean);
+  renderTags();
+}
+
+function removeTag(idx) {
+  tags.splice(idx, 1);
+  renderTags();
+}
+
+function renderTags() {
+  const wrap = document.getElementById('tagWrap');
+  const input = document.getElementById('ingredientInput');
+  // Remove all tags but keep input
+  wrap.querySelectorAll('.tag').forEach(t => t.remove());
+  tags.forEach((t, i) => {
+    const el = document.createElement('div');
+    el.className = 'tag';
+    el.innerHTML = `${t} <button onclick="removeTag(${i})" title="Remove">×</button>`;
+    wrap.insertBefore(el, input);
+  });
+}
+
+function toggleMealType(el) {
+  document.querySelectorAll('.meal-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  selectedMealType = el.dataset.type;
+}
+
+// ── GENERATE ──────────────────────────────────────────
+async function generateRecipes() {
+  if (tags.length === 0) {
+    alert('Please add at least one ingredient!');
+    return;
+  }
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Finding recipes...';
+
+  document.getElementById('loadingState').style.display = 'block';
+  document.getElementById('resultsSection').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
+
+  const loadingMsgs = [
+    'Consulting ancient wisdom...',
+    'Searching through sattvic traditions...',
+    'Balancing the three gunas...',
+    'Channelling pure prana energy...',
+    'Discovering nourishing recipes...'
+  ];
+  let msgIdx = 0;
+  const msgEl = document.getElementById('loadingMsg');
+  const msgInterval = setInterval(() => {
+    msgIdx = (msgIdx + 1) % loadingMsgs.length;
+    msgEl.textContent = loadingMsgs[msgIdx];
+  }, 2000);
+
+  const mealFilter = selectedMealType === 'all' ? 'all meal types (Breakfast, Main Course, Snacks, Drinks, Desserts, Salads)' : selectedMealType;
+
+  const prompt = `You are an expert in Sattvic cuisine — the ancient Ayurvedic tradition of pure, light, and spiritually uplifting food.
+
+STRICT SATTVIC RULES (NEVER violate these):
+- NO onion, NO garlic, NO leeks, NO shallots
+- NO meat, NO fish, NO eggs
+- NO alcohol or vinegar
+- NO processed or preserved foods
+- NO overly spicy, pungent or fermented foods
+- Asafoetida (hing) is allowed in small amounts as a digestive
+- Ginger, cumin, coriander, turmeric, cardamom, fennel are allowed
+
+INGREDIENTS PROVIDED BY USER: ${tags.join(', ')}
+MEAL TYPE FILTER: ${mealFilter}
+
+TASK: Generate as many AUTHENTIC sattvic recipes as possible using ONLY the provided ingredients (plus basic pantry staples like ghee, rock salt, mild spices, jaggery, water).
+
+Respond ONLY with a valid JSON object in this exact structure:
+{
+  "summary": "Brief warm summary sentence about what you found",
+  "totalCount": <number>,
+  "categories": [
+    {
+      "type": "breakfast|main|snack|drink|dessert|salad",
+      "label": "Human readable label",
+      "emoji": "single emoji",
+      "recipes": [
+        {
+          "name": "Recipe Name",
+          "emoji": "single relevant emoji",
+          "description": "1-2 sentence evocative description",
+          "time": "e.g. 20 mins",
+          "difficulty": "Easy|Medium",
+          "servings": "e.g. 2-3",
+          "ingredients": ["quantity + ingredient", ...],
+          "steps": ["Step 1 text", "Step 2 text", ...],
+          "ayurvedaNote": "Short note on Ayurvedic/health benefit of this dish",
+          "keyIngredients": ["ing1", "ing2", "ing3"]
+        }
+      ]
+    }
+  ]
+}
+
+Only include categories that have at least one recipe. Be generous — try to find many recipes. Each recipe should be genuinely different. Steps should be detailed and practical (4-8 steps each).`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 8000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    clearInterval(msgInterval);
+
+    const text = data.content.map(i => i.text || '').join('');
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('No JSON found in response');
+
+    const result = JSON.parse(jsonMatch[0]);
+    allRecipes = result;
+    renderResults(result);
+
+  } catch (err) {
+    clearInterval(msgInterval);
+    console.error(err);
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '✦ Discover Sattvic Recipes';
+  document.getElementById('loadingState').style.display = 'none';
+}
+
+// ── RENDER ────────────────────────────────────────────
+const catClasses = { breakfast: 'cat-breakfast', main: 'cat-main', snack: 'cat-snack', drink: 'cat-drink', dessert: 'cat-dessert', salad: 'cat-salad' };
+
+function renderResults(data) {
+  if (!data.categories || data.categories.length === 0) {
+    document.getElementById('emptyState').style.display = 'block';
+    return;
+  }
+
+  // Header
+  const headerEl = document.getElementById('resultsHeader');
+  headerEl.innerHTML = `
+    <h2>Found <em>${data.totalCount || '?'} Sattvic Recipes</em></h2>
+    <p>${data.summary || 'Pure, nourishing recipes crafted from your ingredients.'}</p>
+    <div class="ornament">✦ ॐ ✦</div>
+  `;
+
+  // Categories
+  const container = document.getElementById('categoriesContainer');
+  container.innerHTML = '';
+
+  data.categories.forEach((cat, catIdx) => {
+    const section = document.createElement('div');
+    section.className = `category-section ${catClasses[cat.type] || ''}`;
+    section.style.animationDelay = `${catIdx * 0.1}s`;
+
+    const recipeCount = cat.recipes.length;
+
+    section.innerHTML = `
+      <div class="category-header">
+        <div class="category-icon">${cat.emoji}</div>
+        <div>
+          <div class="category-title">${cat.label}</div>
+          <div class="category-count">${recipeCount} recipe${recipeCount !== 1 ? 's' : ''}</div>
+        </div>
+      </div>
+      <div class="recipes-grid" id="grid-${catIdx}"></div>
+    `;
+
+    container.appendChild(section);
+
+    const grid = section.querySelector('.recipes-grid');
+    cat.recipes.forEach((recipe, recIdx) => {
+      const card = createRecipeCard(recipe, catIdx, recIdx, cat, data);
+      card.style.animationDelay = `${catIdx * 0.1 + recIdx * 0.06}s`;
+      grid.appendChild(card);
+    });
+  });
+
+  document.getElementById('resultsSection').style.display = 'block';
+  document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function createRecipeCard(recipe, catIdx, recIdx, cat, fullData) {
+  const card = document.createElement('div');
+  card.className = 'recipe-card';
+
+  const keyIngs = (recipe.keyIngredients || recipe.ingredients.slice(0, 3)).slice(0, 4);
+
+  card.innerHTML = `
+    <div class="recipe-card-header">
+      <div class="recipe-emoji">${recipe.emoji}</div>
+      <div class="recipe-name">${recipe.name}</div>
+      <div class="recipe-meta">
+        <span class="meta-pill meta-time">⏱ ${recipe.time}</span>
+        <span class="meta-pill meta-diff">${recipe.difficulty}</span>
+        <span class="meta-pill meta-serv">👥 ${recipe.servings}</span>
+      </div>
+    </div>
+    <div class="recipe-desc">${recipe.description}</div>
+    <div class="recipe-ingredients-preview">
+      ${keyIngs.map(i => `<span class="ing-tag">${typeof i === 'string' ? i.replace(/^\d+[\s\w]*\s+/, '').split(' ').slice(0,2).join(' ') : i}</span>`).join('')}
+    </div>
+    <button class="view-recipe-btn" onclick="openRecipe(${catIdx}, ${recIdx})">View Full Recipe →</button>
+  `;
+
+  return card;
+}
+
+function openRecipe(catIdx, recIdx) {
+  const cat = allRecipes.categories[catIdx];
+  const recipe = cat.recipes[recIdx];
+
+  document.getElementById('modalEmoji').textContent = recipe.emoji;
+  document.getElementById('modalTitle').textContent = recipe.name;
+  document.getElementById('modalSubtitle').textContent = `${cat.emoji} ${cat.label}  ·  Sattvic`;
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <div class="modal-meta-row">
+      <div class="modal-meta-item">⏱ <strong>${recipe.time}</strong></div>
+      <div class="modal-meta-item">📊 <strong>${recipe.difficulty}</strong></div>
+      <div class="modal-meta-item">👥 Serves <strong>${recipe.servings}</strong></div>
+    </div>
+
+    <p style="font-size:0.88rem;color:var(--ink-light);line-height:1.7;margin-bottom:24px;font-style:italic;">${recipe.description}</p>
+
+    <div class="section-title">🌿 Ingredients</div>
+    <div class="ingredients-list">
+      ${recipe.ingredients.map(i => `<div class="ingredient-item">${i}</div>`).join('')}
+    </div>
+
+    <div class="section-title">📋 Method</div>
+    <div class="steps-list">
+      ${recipe.steps.map((s, i) => `
+        <div class="step-item">
+          <div class="step-num">${i + 1}</div>
+          <div class="step-text">${s}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    ${recipe.ayurvedaNote ? `
+    <div class="ayurveda-note">
+      <p><strong>🪔 Ayurvedic Wisdom:</strong> ${recipe.ayurvedaNote}</p>
+    </div>` : ''}
+  `;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOnOverlay(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
